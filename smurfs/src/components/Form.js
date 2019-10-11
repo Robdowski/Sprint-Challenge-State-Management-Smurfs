@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { submitForm } from "../actions";
 
 function Form(props) {
+    console.log(props)
   return (
     <div>
       <form onSubmit={props.submitForm}>
@@ -27,9 +28,7 @@ function Form(props) {
 
 const mapStateToProps = state => {
   return {
-    name: state.name,
-    age: state.age,
-    height: state.height
+    smurfs: state.smurfs
   };
 };
 
