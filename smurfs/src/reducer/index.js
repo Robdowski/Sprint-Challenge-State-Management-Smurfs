@@ -1,16 +1,9 @@
-import { SUBMIT_FORM, START_FETCHING, FETCH_ERROR, FETCH_SUCCESS } from "../actions";
+import { SUBMIT_FORM, START_FETCHING, FETCH_ERROR, FETCH_SUCCESS, DELETE_SMURF } from "../actions";
 
 const initialState = {
   isFetching: false,
   error: "",
-  smurfs: [
-    {
-      name: "Brainey",
-      age: 200,
-      height: "5cm",
-      id: 0
-    }
-  ]
+  smurfs: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -48,6 +41,11 @@ const reducer = (state = initialState, action) => {
           }
         ]
       };
+    case DELETE_SMURF:
+      return{
+        ...state,
+        smurfs: state.smurfs.filter(item => item.id !== action.payload)
+      }
 
     default:
       return state;
