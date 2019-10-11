@@ -32,8 +32,8 @@ export const getSmurfs = () => dispatch => {
 export const deleteSmurf = id => dispatch => {
     dispatch({type: DELETE_SMURF, payload: id})
     axios.delete(`http://localhost:3333/smurfs/${id}`)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
+    .then(res => dispatch({type: FETCH_SUCCESS, payload: res.data}))
+    .catch(err => dispatch({type: FETCH_ERROR, payload: err.response}))
 }
 
 export const beginEdit = () => dispatch => {
@@ -49,6 +49,6 @@ export const submitEdit = e => dispatch => {
         age: e.target.editage.value,
         height: e.target.editheight.value,
     })
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
+    .then(res => dispatch({type: FETCH_SUCCESS, payload: res.data}))
+    .catch(err =>dispatch({type: FETCH_ERROR, payload: err.response}))
 }
