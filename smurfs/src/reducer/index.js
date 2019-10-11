@@ -1,6 +1,8 @@
-import { SUBMIT_FORM } from "../actions";
+import { SUBMIT_FORM, START_FETCHING, FETCH_ERROR, FETCH_SUCCESS } from "../actions";
 
 const initialState = {
+  isFetching: false,
+  error: "",
   smurfs: [
     {
       name: "Brainey",
@@ -13,6 +15,26 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case START_FETCHING:
+      return {
+        ...state,
+        isFetching: true,
+        error: ""
+      };
+    case FETCH_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: "",
+        smurfs: [...action.payload]
+      };
+    case FETCH_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
+        smurfs: [...state.smurfs]
+      };
     case SUBMIT_FORM:
       return {
         ...state,
