@@ -1,9 +1,10 @@
-import { SUBMIT_FORM, START_FETCHING, FETCH_ERROR, FETCH_SUCCESS, DELETE_SMURF } from "../actions";
+import { SUBMIT_FORM, START_FETCHING, FETCH_ERROR, FETCH_SUCCESS, DELETE_SMURF, BEGIN_EDIT, SUBMIT_EDIT } from "../actions";
 
 const initialState = {
   isFetching: false,
   error: "",
-  smurfs: []
+  smurfs: [],
+  isEditing: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -45,6 +46,17 @@ const reducer = (state = initialState, action) => {
       return{
         ...state,
         smurfs: state.smurfs.filter(item => item.id !== action.payload)
+      }
+    case BEGIN_EDIT:
+      return{
+        ...state,
+        isEditing: true
+      }
+
+    case SUBMIT_EDIT:
+      return{
+        ...state,
+        isEditing: false
       }
 
     default:
